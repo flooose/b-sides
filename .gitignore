@@ -1,3 +1,6 @@
 vendor
 tmp
 log/development.log
+
+# b-sides
+.byebug_history
