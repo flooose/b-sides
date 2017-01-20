@@ -27,4 +27,16 @@ class GittesController < ApplicationController
     render json: msg
   end
 
+  def create
+    gitte = Gitte.new(url: params[:url], reponame: params[:reponame])
+    if gitte.save
+      render json: {status: "ok", url: gitte.url, reponame: gitte.reponame}
+    else
+      render json: {status: :error,
+                    url: gitte.url,
+                    reponame: gitte.reponame,
+                    message: gitte.errors}, status: :error
+    end
+  end
+
 end

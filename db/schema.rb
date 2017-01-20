@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113164514) do
+ActiveRecord::Schema.define(version: 20170120160028) do
 
   create_table "gittes", force: :cascade do |t|
     t.string   "reponame"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "url"
   end
 
 end
