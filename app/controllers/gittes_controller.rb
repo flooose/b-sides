@@ -1,4 +1,4 @@
-class GitteController < ApplicationController
+class GittesController < ApplicationController
 
   protect_from_forgery with: :exception
 
