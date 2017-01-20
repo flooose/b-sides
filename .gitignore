@@ -1,6 +1,6 @@
 vendor
 tmp
-log/development.log
+log/*.log
 
 # b-sides
 db/*.sqlite3
