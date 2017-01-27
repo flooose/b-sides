@@ -1,6 +1,7 @@
 class GittesController < ApplicationController
 
-  protect_from_forgery with: :exception
+  #protect_from_forgery with: :exception
+  skip_before_filter :verify_authenticity_token
 
   def index
     circleci = Netrc.read()['circleci.com']
@@ -28,7 +29,11 @@ class GittesController < ApplicationController
   end
 
   def create
-    gitte = Gitte.new(url: params[:url], reponame: params[:reponame])
+    # change this when we support new urls
+    circleci = Netrc.read()['circleci.com']
+    url = "https://circleci.com/api/v1.1/recent-builds?circle-token=#{circleci.login}"
+
+    gitte = Gitte.new(url: url, reponame: params[:reponame])
     if gitte.save
       render json: {status: "ok", url: gitte.url, reponame: gitte.reponame}
     else
@@ -37,6 +42,11 @@ class GittesController < ApplicationController
                     reponame: gitte.reponame,
                     message: gitte.errors}, status: :error
     end
+  end
+
+  private
+  def gitte_params
+    params.require(:url, :reponame)
   end
 
 end
